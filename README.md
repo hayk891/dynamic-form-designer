@@ -19,5 +19,5 @@ npm install
 Local run - ng serve
 ```
 
-
+ 
 #####Main idea of task is created universal json which can be used everywhere.
