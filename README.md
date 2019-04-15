@@ -12,7 +12,7 @@ cd dynamic-form-designer
 npm install
 ```
 
-
+ 
 ### Step 3 - run project
 
 ```
