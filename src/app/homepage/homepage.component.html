@@ -1,0 +1,49 @@
+<div class="container main-grid">
+  <div>
+    <div class="title-div">
+      <h2>Dynamic Form Designer</h2>
+    </div>
+    <div class="menu-div">
+      <div class="button-add">
+        <button mat-fab color="primary" (click)="(this.showMenu = !this.showMenu)">{{ showMenu ? '-' : '+' }}</button>
+
+        <div class="dropdown-menu-container">
+          <ng-container *ngIf="showMenu">
+            <button class="add-btn" mat-button [matMenuTriggerFor]="menu">Choose Field Type</button>
+            <mat-menu #menu="matMenu">
+              <ng-container *ngFor="let item of FieldTypes | keyvalue">
+                <button mat-menu-item (click)="addField(item.key)">{{item.value}}</button>
+              </ng-container>
+            </mat-menu>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <section class="main-section">
+      <mat-card class="main-card">
+        <div class="info-block">
+          <input class="form-title" type="text" placeholder="Form title" (keyup)="setFormTitle($event)" [value]="formService.getTitle">
+          <input class="form-description" type="text" placeholder="Form description" (keyup)="setFormDesc($event)">
+        </div>
+        <div class="see-buttons">
+          <i class="material-icons" style="cursor: pointer" (click)="(showViewMode = !showViewMode)">
+            {{showViewMode ? 'arrow_back': 'arrow_forward'}}
+          </i>
+         <!-- <i class="material-icons refresh" *ngIf="showViewMode" style="cursor: pointer" (click)="refrashFormView()">
+            refresh
+          </i>-->
+        </div>
+        <div class="mat-card-inner">
+          <div class="left-side">
+            <app-edit-mode></app-edit-mode>
+          </div>
+          <div class="right-side">
+            <ng-container *ngIf="showViewMode">
+              <app-view-mode></app-view-mode>
+            </ng-container>
+          </div>
+        </div>
+      </mat-card>
+    </section>
+  </div>
+</div>

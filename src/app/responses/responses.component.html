@@ -1,0 +1,19 @@
+<div class="container main-grid">
+    <div>
+        <div class="title-div">
+            <h2>Dynamic Form Designer</h2>
+        </div>
+        <section class="main-section">
+            <mat-card class="main-card inner-card">
+                <div class="mat-card-inner">
+                    <div class="left-side">
+                        <ngx-json-viewer [json]="allFormFields"></ngx-json-viewer>
+                    </div>
+                    <div class="right-side">
+                        <ngx-json-viewer [json]="answer"></ngx-json-viewer>
+                    </div>
+                </div>
+            </mat-card>
+        </section>
+    </div>
+</div>

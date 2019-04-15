@@ -1,0 +1,97 @@
+.q-description{
+  color: rgba(0,0,0,0.38);
+  font-size: 14px;
+}
+
+.delete-btn{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0;
+  transition: .2s ease-in-out;
+}
+.form-item{
+  padding: 12px 12px 12px;
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
+  margin-bottom: 30px;
+  position: relative;
+  &:hover .delete-btn{
+    opacity: 1;
+    transition: .2s ease-in-out;
+  }
+}
+
+.check-label{
+  color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  color: #007c91;
+  font-size: 14px;
+  align-items: center;
+  input{
+    margin-right: 10px;
+  }
+}
+.add-option{
+  color: rgb(0, 124, 145);
+  font-size: 14px;
+  padding: 0 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  mat-icon{
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+.radio-option{
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+  &:hover{
+    .delete-item{
+      opacity: 1;
+      transition: .2s ease-in-out;
+    }
+  }
+  .label-text{
+    width: 20px;
+  }
+  .option{
+    margin-left: 14px;
+    flex: 1;
+    input{
+      padding: 0 0 4px;
+      border-width: 0 0 1px 0;
+      border-radius: 0;
+    }
+  }
+}
+.delete-item{
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  opacity: 0;
+  transition: .2s ease-in-out;
+  cursor: pointer;
+}
+.file-checkbox, .file-radio{
+  margin-right: 16px;
+  font-size: 14px;
+  input{
+    margin-right: 10px;
+  }
+}
+.edit-block-item:not(:last-child){
+  margin: 26px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+}
+.block-title{
+  font-weight: 500;
+  padding: 0 14px;
+  margin-bottom: 20px;
+}

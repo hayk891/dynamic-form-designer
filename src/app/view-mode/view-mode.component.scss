@@ -1,0 +1,74 @@
+.view-form{
+  padding: 12px;
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+.view-block{
+  margin-bottom: 30px;
+}
+.radio-option{
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+  &:hover{
+    .delete-item{
+      opacity: 1;
+      transition: .2s ease-in-out;
+    }
+  }
+  .label-text{
+    width: 20px;
+  }
+  .option.view-option{
+    flex: 1;
+    input{
+      padding: 0 0 4px;
+      border-width: 0 0 1px 0;
+      border-radius: 0;
+      margin-right: 14px;
+    }
+  }
+}
+.file-upload-container{
+  margin-bottom: 24px;
+}
+.add-btn{
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
+  min-width: 130px;
+}
+.action{
+  label{
+    position: relative;
+    overflow: hidden;
+  }
+  p{
+    color: rgba(0, 0, 0, 0.38);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+}
+#choosePic{
+  //visibility: hidden;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  position: absolute;
+  height: 40px;
+  z-index: 1;
+  cursor: pointer;
+}
+.file-block{
+  width: 100%;
+  display: block;
+  max-width: 400px;
+  margin-top: 12px;
+  img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+}

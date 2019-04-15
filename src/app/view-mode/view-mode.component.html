@@ -1,0 +1,84 @@
+<div>
+    <ng-container *ngIf="formService.formFields && formService.formFields.length > 0">
+        <form class="view-form" action="" (ngSubmit)="onSubmit()"  novalidate [formGroup]="viewForm">
+            <ng-container *ngFor="let field of formService.formFields; let i = index;">
+                <ng-container *ngIf="['shortAnswer', 'paragraph'].includes(field.type)">
+                    <div class="view-block" *ngIf="field.question">
+                        <p>
+                            {{field.question}}
+                        </p>
+                        <p>
+                            <input formControlName="{{field.type + '_' + i}}"
+                                   (keyup)="changeFieldTextAnswer(field, $event)"
+                                   matInput placeholder="{{field.answerPlaceholder}}" [required]="field.required">
+                        </p>
+                        <p>
+                            <app-control-message [control]="viewForm.controls[field.type + '_' + i]"></app-control-message>
+                        </p>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="['multipleChoice'].includes(field.type)">
+                    <div class="view-block" *ngIf="field.question">
+                        <p>
+                            {{field.question}}
+                        </p>
+
+                        <p>
+                            <ng-container *ngFor="let option of field.options; let choise_index = index;">
+                                <div class="radio-option">
+                                    <label class="option view-option">
+                                        <input type="radio" formControlName="{{field.type + '_' + i}}" value="{{option.name}}"
+                                               (change)="changeMultipleChoiceAnswer(field, choise_index, $event)">
+                                        {{option.name}}
+                                    </label>
+                                </div>
+                            </ng-container>
+                        </p>
+                    </div>
+
+
+                </ng-container>
+
+                <ng-container *ngIf="['fileUpload'].includes(field.type)">
+                    <div *ngIf="field.question">
+                        <p>
+                            {{field.question}}
+                        </p>
+                    </div>
+
+                    <div class="file-upload-container">
+                        <div class="action">
+                            <p>{{
+                                (getFileTypes(field) && getFileMaxUploadSize(field)) ?
+                                'Only (' + getFileTypes(field) + ' ) Max ' + getFileMaxUploadSize(field) + ' Mb' : ''
+                                }}
+                            </p>
+                            <div>
+                                <input type="file" id="choosePic" formControlName="{{field.type + '_' + i}}" (change)="onFileChange($event, field)">
+                                <label for="choosePic">
+                                    <button class="add-btn" mat-button>
+                                        Choose file
+                                    </button>
+                                </label>
+                            </div>
+
+                            <ng-container *ngIf="field.fileUrl">
+                                <div class="file-block">
+                                    <img class="upload-file-img" [src]="field.fileUrl" alt="uploaded image"/>
+                                </div>
+                            </ng-container>
+
+                        </div>
+
+                        <div class="view">
+
+                        </div>
+                    </div>
+
+                </ng-container>
+            </ng-container>
+            <button [disabled]="!viewForm.valid" mat-raised-button class="mat-primary" type="submit"> Submit</button>
+        </form>
+    </ng-container>
+</div>

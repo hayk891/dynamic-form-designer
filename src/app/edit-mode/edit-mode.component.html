@@ -1,0 +1,108 @@
+<div>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)"
+                  *ngIf="formService.formFields && formService.formFields.length > 0">
+        <div class="example-box" cdkDrag *ngFor="let field of formService.formFields; let i = index;">
+            <ng-container *ngIf="['shortAnswer', 'paragraph'].includes(field.type)">
+                <p> {{FieldTypes[field.type]}} </p>
+                <div class="form-item">
+                    <mat-icon class="delete-btn" (click)="formService.deleteField(i)">delete</mat-icon>
+                    <p>
+                        <input matInput placeholder="{{field.questionPlaceholder}}"
+                               (keyup)='questionKeyUp$.next({event: $event, field: field})'>
+                    </p>
+                    <p class="q-description">
+                        {{field.answerPlaceholder}}
+                    </p>
+                    <div>
+                        <label class="check-label" for="required_{{field.type}}_{{i}}">
+                            <input type="checkbox" id="required_{{field.type}}_{{i}}"
+                                   (change)="changeFieldRequired($event, field)">
+                            Required
+                        </label>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="['multipleChoice'].includes(field.type)">
+                <p> {{FieldTypes[field.type]}} </p>
+                <div class="form-item">
+                    <mat-icon class="delete-btn" (click)="formService.deleteField(i)">delete</mat-icon>
+
+                    <p>
+                        <input matInput placeholder="{{field.questionPlaceholder}}"
+                               (keyup)='questionKeyUp$.next({event: $event, field: field})'>
+                    </p>
+
+                    <ng-container *ngFor="let option of field.options; let choise_index = index;">
+                        <div class="radio-option">
+                            <label class="label-text">
+                                <input type="radio" disabled>
+                            </label>
+                            <label class="option" for="multipleChoice_{{choise_index}}">
+                                <input (keyup)="editMultipleChoiceOption(field, choise_index, $event)" type="text"
+                                       id="multipleChoice_{{choise_index}}" [value]="option.name">
+                            </label>
+                            <ng-container *ngIf="field.options.length > 1" style="cursor: pointer">
+                                <mat-icon class="delete-item" (click)="deleteMultipleChoiceOption(field, choise_index)">
+                                    delete
+                                </mat-icon>
+                            </ng-container>
+
+                        </div>
+                    </ng-container>
+                    <p class="add-option" (click)="addMultipleChoiceOption(field)">
+                        <mat-icon>add</mat-icon>
+                        Add option
+                    </p>
+                    <div>
+                        <label class="check-label" for="required_multipleChoice_{{i}}">
+                            <input type="checkbox" id="required_multipleChoice_{{i}}"
+                                   (change)="changeFieldRequired($event, field)">
+                            Required
+                        </label>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="['fileUpload'].includes(field.type)">
+                <p class="block-title"> {{FieldTypes[field.type]}} </p>
+                <div class="form-item">
+                    <mat-icon class="delete-btn" (click)="formService.deleteField(i)">delete</mat-icon>
+
+                    <p>
+                        <input matInput placeholder="{{field.questionPlaceholder}}"
+                               (keyup)='questionKeyUp$.next({event: $event, field: field})'>
+                    </p>
+
+                    <div class="edit-block-item">
+                        <p>File Type</p>
+                        <ng-container *ngFor="let type of field.rules.type; let type_index = index;">
+                            <label class="file-checkbox" for="type_{{type_index}}">
+                                <input (change)="changeFileFieldType($event, field, type_index)" type="checkbox"
+                                       id="type_{{type_index}}">{{type.name}}
+                            </label>
+                        </ng-container>
+                    </div>
+
+                    <div class="edit-block-item">
+                        <p>Maximum file size</p>
+                        <ng-container *ngFor="let sizeObj of field.rules.maxUploadSize; let sizeObj_index = index;">
+                            <label class="file-radio" for="sizeObj_{{sizeObj_index}}">
+                                <input (change)="changeFileFieldMaxSize($event, field, sizeObj_index)" type="radio"
+                                       name="maxUploadRadio" id="sizeObj_{{sizeObj_index}}">{{sizeObj.value}} Mb
+                            </label>
+                        </ng-container>
+                    </div>
+                    <div>
+                        <label class="check-label" for="required_fileUpload_{{i}}">
+                            <input type="checkbox" id="required_fileUpload_{{i}}"
+                                   (change)="changeFieldRequired($event, field)">
+                            Required
+                        </label>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>
